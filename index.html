@@ -2,10 +2,44 @@
 <html>
 <head>
 	<title>Cube Matrix</title>
+	<script type="text/javascript" src="matrix.js"></script>
 </head>
-
 <body>
 
+	<table>
+		<tbody>
+			<tr>
+				<td colspan="2"><center>Matrix A</center></td>
+				<td colspan="2"><center>Matrix B</center></td>
+			</tr>
+			<tr>
+				<td>Width</td>
+				<td>Height</td>
+				<td>Width</td>
+				<td>Height</td>
+			</tr>
+
+			<tr>
+				<td><input min="1" id="matAwidth"></td>
+				<td><input min="1" id="matAheight"></td>
+				<td><input min="1" id="matBwidth"></td>
+				<td><input min="1" id="matBheight"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<button onclick="createMatrix()">Create Matrix</button>
+
+	<table>
+		<tbody id="matA">
+
+		</tbody>
+	</table>
+
+	<table >
+		<tbody id="matB"> 
+		</tbody>
+	</table>
 
 
 </body>
