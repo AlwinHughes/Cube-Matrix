@@ -1,3 +1,17 @@
 table{
 	border: black;
 }
+
+#matAcont{
+	display: inline-block;
+	float: left;
+}
+
+#matBcont{
+	display: inline-block;
+	float: right;
+}
+
+input{
+	width: 40px;
+}

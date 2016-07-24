@@ -7,41 +7,55 @@
 	<link rel="stylesheet" type="text/css" href="css.css">
 </head>
 <body>
+	<center><h1>Matrix multiplier</h3></center>
+	<center>
+		<table>
+			<tbody>
+				<tr>
+					<td colspan="2"><center>Matrix A</center></td>
+					<td colspan="2"><center>Matrix B</center></td>
+				</tr>
+				<tr>
+					<td>Width</td>
+					<td>Height</td>
+					<td>Width</td>
+					<td>Height</td>
+				</tr>
 
-	<table>
-		<tbody>
-			<tr>
-				<td colspan="2"><center>Matrix A</center></td>
-				<td colspan="2"><center>Matrix B</center></td>
-			</tr>
-			<tr>
-				<td>Width</td>
-				<td>Height</td>
-				<td>Width</td>
-				<td>Height</td>
-			</tr>
+				<tr>
+					<td><input min="1" type="number" id="matAwidth"></td>
+					<td><input min="1" type="number" id="matAheight"></td>
+					<td><input min="1" type="number" id="matBwidth"></td>
+					<td><input min="1" type="number" id="matBheight"></td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+	<center>
+		<button onclick="createMatrix()">Create Matrix</button>
+	</center>
 
-			<tr>
-				<td><input min="1" id="matAwidth"></td>
-				<td><input min="1" id="matAheight"></td>
-				<td><input min="1" id="matBwidth"></td>
-				<td><input min="1" id="matBheight"></td>
-			</tr>
-		</tbody>
-	</table>
+	<center>
+	<div id="matAcont">
+		A = 
+		<table>
+			<tbody id="matA">
 
-	<button onclick="createMatrix()">Create Matrix</button>
+			</tbody>
+		</table>
 
-	<table>
-		<tbody id="matA">
-
-		</tbody>
-	</table>
-
-	<table >
-		<tbody id="matB"> 
-		</tbody>
-	</table>
+	</div>
+	
+	<div id="matBcont">
+		B = 
+		<table >
+			<tbody id="matB"> 
+			
+			</tbody>
+		</table>
+	</div>
+	</center>
+	
 
 
 </body>
