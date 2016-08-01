@@ -167,39 +167,42 @@ function calculate(){
 	matANSwidth = matANS.size()[1];
 
 	if(cur_num_ANS_row<matANSheight){
-			for(var i = cur_num_ANS_row; i<matANSheight;i++){
-				$('#matANS').append("<tr id='ANS_row_"+i+"'></tr>");	
-			}	
-		}else if(cur_num_ANS_row>matANSheight){
-			for(var i = cur_num_ANS_row-1; i>matANSheight-1;i--){
-				$('#ANS_row_'+i).remove();
-			}
+		for(var i = cur_num_ANS_row; i<matANSheight;i++){
+			$('#matANS').append("<tr id='ANS_row_"+i+"'></tr>");	
+		}	
+	}else if(cur_num_ANS_row>matANSheight){
+		for(var i = cur_num_ANS_row-1; i>matANSheight-1;i--){
+			$('#ANS_row_'+i).remove();
 		}
-		cur_num_ANS_row = matANSheight;
-		if(cur_num_ANS_col<matANSwidth){
-			for(var i = 0; i<matANSheight;i++){
-				if($('#ANS_row_'+i +' > td').length<matANSwidth+1){
-					var num_of_rows = $('#ANS_row_'+i +' > td').length;
-					for(var j = num_of_rows; j<matANSwidth;j++){
-						$('#ANS_row_'+i).append("<td id='ANS_col_"+j+"'>"+matANS._data[i][j]+"</td>");
-					}
-				}
-			}
-		}else if(cur_num_ANS_col+1>matANSwidth){
-			console.log("remove colom")
-			for(var i = 0; i<matANSheight;i++){
-				if($('#ANS_row_'+i).children().length>matANSwidth){
-					for(var j = $('#ANS_row_'+i+' > td').length-1; j>matANSwidth-1;j--){
-						$('#ANS_col_'+j).remove();
-					}
-				}
-			}
-		}
+	}
+	cur_num_ANS_row = matANSheight;
+	if(cur_num_ANS_col<matANSwidth){
 		for(var i = 0; i<matANSheight;i++){
-			for(var j = 0; j<matANSwidth;j++){
-				$("#ANS_row_"+i+" #ANS_col_"+j).text(matANS._data[i][j]);
+			if($('#ANS_row_'+i +' > td').length<matANSwidth+1){
+				var num_of_rows = $('#ANS_row_'+i +' > td').length;
+				for(var j = num_of_rows; j<matANSwidth;j++){
+					$('#ANS_row_'+i).append("<td id='ANS_col_"+j+"'>"+matANS._data[i][j]+"</td>");
+				}
 			}
 		}
-		cur_num_ANS_col = matANSwidth-1;
+	}else if(cur_num_ANS_col+1>matANSwidth){
+		console.log("remove colom")
+		for(var i = 0; i<matANSheight;i++){
+			if($('#ANS_row_'+i).children().length>matANSwidth){
+				for(var j = $('#ANS_row_'+i+' > td').length-1; j>matANSwidth-1;j--){
+					$('#ANS_col_'+j).remove();
+				}
+			}
+		}
+	}
+	for(var i = 0; i<matANSheight;i++){
+		for(var j = 0; j<matANSwidth;j++){
+			$("#ANS_row_"+i+" #ANS_col_"+j).text(matANS._data[i][j]);
+		}
+	}
+	cur_num_ANS_col = matANSwidth-1;
+}
 
+function setAToAnswer(){
+	
 }
