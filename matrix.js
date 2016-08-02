@@ -56,7 +56,12 @@ function createMatrix(){
 
 }
 
-function resizeMatA(height,width,force_update) {
+function resizeMatA(height,width,force_update_data,rest) {
+	if(rest){
+		$('#matA').empty();
+		cur_num_A_row = 0;
+		cur_num_A_col = 0;	
+	}
 	if(cur_num_A_row<=height){
 		for(var i = cur_num_A_row; i<height;i++){
 			$('#matA').append("<tr id='A_row_"+i+"'></tr>");	
@@ -72,7 +77,7 @@ function resizeMatA(height,width,force_update) {
 			if($('#A_row_'+i +' > td').length<width+1){
 				var num_of_rows = $('#A_row_'+i +' > td').length;
 				for(var j = num_of_rows; j<width;j++){
-					$('#A_row_'+i).append("<td id='A_col_"+j+"'>"+"<input type='number' onblur='matAupdate(this)' value ='"+matA[i][j]+"'></td>");
+					$('#A_row_'+i).append("<td id='A_col_"+j+"'>"+"<input type='number' " +( enable_cube ? "class='matrix_value'":"") +" onblur='matAupdate(this)' value ='"+matA[i][j]+"'></td>");
 				}
 			}
 		}
@@ -86,7 +91,7 @@ function resizeMatA(height,width,force_update) {
 		}
 	}
 	cur_num_A_col = width-1;
-	if(force_update){
+	if(force_update_data&&!rest){
 		for(var i = 0; i<height;i++){
 			for(var j = 0; j<width;j++){
 				$('#A_row_'+i+' > #A_col_'+j+' > input')[0].value = matA[i][j];
@@ -96,7 +101,12 @@ function resizeMatA(height,width,force_update) {
 
 }
 
-function resizeMatB (height,width) {
+function resizeMatB (height,width,force_update_data,rest) {
+	if(rest){
+		$('#matB').empty();
+		cur_num_B_row = 0;
+		cur_num_B_col = 0;	
+	}
 	if(cur_num_B_row<height){
 		for(var i = cur_num_B_row; i<height;i++){
 			$('#matB').append("<tr id='B_row_"+i+"'></tr>");	
@@ -106,13 +116,14 @@ function resizeMatB (height,width) {
 			$('#B_row_'+i).remove();
 		}
 	}
+
 	cur_num_B_row = height;
 	if(cur_num_B_col<width){
 		for(var i = 0; i<height;i++){
 			if($('#B_row_'+i +' > td').length<width+1){
 				var num_of_rows = $('#B_row_'+i +' > td').length;
 				for(var j = num_of_rows; j<width;j++){
-					$('#B_row_'+i).append("<td id='B_col_"+j+"'>"+"<input type='number' onblur='matBupdate(this)' value ="+matB[i][j]+"></td>");
+					$('#B_row_'+i).append("<td id='B_col_"+j+"'>"+"<input type='number' " +( enable_cube ? "class='matrix_value'":"") +" onblur='matBupdate(this)' value ="+matB[i][j]+"></td>");
 				}
 			}
 		}
@@ -126,24 +137,22 @@ function resizeMatB (height,width) {
 		}
 	}
 	cur_num_B_col = width-1;
-	if(force_update){
+	if(force_update_data&&!rest){
 		for(var i = 0; i<height;i++){
 			for(var j = 0; j<width;j++){
 				$('#B_row_'+i+' > #B_col_'+j+' > input')[0].value = matB[i][j];
 			}
 		}
 	}
-
-
 }
 
 function displayMatrix () {
 	if(cur_num_A_row!==matAheight||cur_num_A_col!==matAwidth||cur_num_B_row!==matBheight||cur_num_B_col!==matBwidth){
 		//mat A
-		resizeMatA(matAheight,matAwidth);
+		resizeMatA(matAheight,matAwidth,false);
 
 		//matB
-		resizeMatB(matBheight,matBwidth);
+		resizeMatB(matBheight,matBwidth,false);
 	}
 }
 
@@ -232,5 +241,5 @@ function setAToAnswer(){
 
 function setBToAnswer() {
 	matB = matANS._data;
-	resizeMatA(matANS.size()[0],matANS.size()[1],true);
+	resizeMatB(matANS.size()[0],matANS.size()[1],true);
 }

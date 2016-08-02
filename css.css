@@ -15,3 +15,7 @@ table{
 input{
 	width: 40px;
 }
+
+.matrix_value{
+	width: 30px;
+}
