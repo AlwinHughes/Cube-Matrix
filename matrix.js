@@ -64,7 +64,7 @@ function createMatrix(){
 function displayMatrix () {
 	if(cur_num_A_row!==matAheight||cur_num_A_col!==matAwidth||cur_num_B_row!==matBheight||cur_num_B_col!==matBwidth){
 		//mat A
-		if(cur_num_A_row<matAheight){
+		if(cur_num_A_row<=matAheight){
 			for(var i = cur_num_A_row; i<matAheight;i++){
 				$('#matA').append("<tr id='A_row_"+i+"'></tr>");	
 			}	
@@ -151,6 +151,11 @@ function calculate(){
 		D: 1,
 		C: 1
 	}
+	console.log(scope);
+	if(enable_cube){
+		console.log(PLL_SCOPE);
+		scope = PLL_SCOPE;
+	}
 	var input = document.getElementById('input').value;
 	console.log("input: "+input);
 	console.log("includes A^-"+ input.includes("A^-"));
@@ -163,6 +168,9 @@ function calculate(){
 		input = input.replace("A^-","C^")
 	}
 	matANS = math.eval(input,scope);
+	if(typeof matANS.size !=='function'){
+		matANS = math.matrix(matANS);
+	}
 	matANSheight = matANS.size()[0];
 	matANSwidth = matANS.size()[1];
 
