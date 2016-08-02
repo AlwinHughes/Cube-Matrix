@@ -41,8 +41,6 @@ function createMatrix(){
 			}
 		}	
 	}
-	console.log("matA");
-	console.log(matA);
 
 	for(var i = 0; i<matBheight; i++){
 		matB.push(new Array(matBwidth))
@@ -54,78 +52,98 @@ function createMatrix(){
 			}
 		}	
 	}
-	console.log("matB = ");
-	console.log(matB);
-
 	displayMatrix();
+
+}
+
+function resizeMatA(height,width,force_update) {
+	if(cur_num_A_row<=height){
+		for(var i = cur_num_A_row; i<height;i++){
+			$('#matA').append("<tr id='A_row_"+i+"'></tr>");	
+		}	
+	}else if(cur_num_A_row>height){
+		for(var i = cur_num_A_row-1; i>height-1;i--){
+			$('#A_row_'+i).remove();
+		}
+	}
+	cur_num_A_row = height;
+	if(cur_num_A_col<width){
+		for(var i = 0; i<height;i++){
+			if($('#A_row_'+i +' > td').length<width+1){
+				var num_of_rows = $('#A_row_'+i +' > td').length;
+				for(var j = num_of_rows; j<width;j++){
+					$('#A_row_'+i).append("<td id='A_col_"+j+"'>"+"<input type='number' onblur='matAupdate(this)' value ='"+matA[i][j]+"'></td>");
+				}
+			}
+		}
+	}else if(cur_num_A_col+1>width){
+		for(var i = 0; i<height;i++){
+			if($('#A_row_'+i).children().length>width){
+				for(var j = $('#A_row_'+i+' > td').length-1; j>width-1;j--){
+					$('#A_col_'+j).remove();
+				}
+			}
+		}
+	}
+	cur_num_A_col = width-1;
+	if(force_update){
+		for(var i = 0; i<height;i++){
+			for(var j = 0; j<width;j++){
+				$('#A_row_'+i+' > #A_col_'+j+' > input')[0].value = matA[i][j];
+			}
+		}
+	}
+
+}
+
+function resizeMatB (height,width) {
+	if(cur_num_B_row<height){
+		for(var i = cur_num_B_row; i<height;i++){
+			$('#matB').append("<tr id='B_row_"+i+"'></tr>");	
+		}	
+	}else if(cur_num_B_row>height){
+		for(var i = cur_num_B_row-1; i>height-1;i--){
+			$('#B_row_'+i).remove();
+		}
+	}
+	cur_num_B_row = height;
+	if(cur_num_B_col<width){
+		for(var i = 0; i<height;i++){
+			if($('#B_row_'+i +' > td').length<width+1){
+				var num_of_rows = $('#B_row_'+i +' > td').length;
+				for(var j = num_of_rows; j<width;j++){
+					$('#B_row_'+i).append("<td id='B_col_"+j+"'>"+"<input type='number' onblur='matBupdate(this)' value ="+matB[i][j]+"></td>");
+				}
+			}
+		}
+	}else if(cur_num_B_col+1>width){
+		for(var i = 0; i<height;i++){
+			if($('#B_row_'+i).children().length>width){
+				for(var j = $('#B_row_'+i+'> td').length-1; j>width-1;j--){
+					$('#B_col_'+j).remove();
+				}
+			}
+		}
+	}
+	cur_num_B_col = width-1;
+	if(force_update){
+		for(var i = 0; i<height;i++){
+			for(var j = 0; j<width;j++){
+				$('#B_row_'+i+' > #B_col_'+j+' > input')[0].value = matB[i][j];
+			}
+		}
+	}
+
 
 }
 
 function displayMatrix () {
 	if(cur_num_A_row!==matAheight||cur_num_A_col!==matAwidth||cur_num_B_row!==matBheight||cur_num_B_col!==matBwidth){
 		//mat A
-		if(cur_num_A_row<=matAheight){
-			for(var i = cur_num_A_row; i<matAheight;i++){
-				$('#matA').append("<tr id='A_row_"+i+"'></tr>");	
-			}	
-		}else if(cur_num_A_row>matAheight){
-			for(var i = cur_num_A_row-1; i>matAheight-1;i--){
-				$('#A_row_'+i).remove();
-			}
-		}
-		cur_num_A_row = matAheight;
-		if(cur_num_A_col<matAwidth){
-			for(var i = 0; i<matAheight;i++){
-				if($('#A_row_'+i +' > td').length<matAwidth+1){
-					var num_of_rows = $('#A_row_'+i +' > td').length;
-					for(var j = num_of_rows; j<matAwidth;j++){
-						$('#A_row_'+i).append("<td id='A_col_"+j+"'>"+"<input type='number' onblur='matAupdate(this)' value ='"+matA[i][j]+"'></td>");
-					}
-				}
-			}
-		}else if(cur_num_A_col+1>matAwidth){
-			console.log("remove colom")
-			for(var i = 0; i<matAheight;i++){
-				if($('#A_row_'+i).children().length>matAwidth){
-					for(var j = $('#A_row_'+i+' > td').length-1; j>matAwidth-1;j--){
-						$('#A_col_'+j).remove();
-					}
-				}
-			}
-		}
-		cur_num_A_col = matAwidth-1;
+		resizeMatA(matAheight,matAwidth);
 
 		//matB
-		if(cur_num_B_row<matBheight){
-			for(var i = cur_num_B_row; i<matBheight;i++){
-				$('#matB').append("<tr id='B_row_"+i+"'></tr>");	
-			}	
-		}else if(cur_num_B_row>matBheight){
-			for(var i = cur_num_B_row-1; i>matBheight-1;i--){
-				$('#B_row_'+i).remove();
-			}
-		}
-		cur_num_B_row = matBheight;
-		if(cur_num_B_col<matBwidth){
-			for(var i = 0; i<matBheight;i++){
-				if($('#B_row_'+i +' > td').length<matBwidth+1){
-					var num_of_rows = $('#B_row_'+i +' > td').length;
-					for(var j = num_of_rows; j<matBwidth;j++){
-						$('#B_row_'+i).append("<td id='B_col_"+j+"'>"+"<input type='number' onblur='matBupdate(this)' value ="+matB[i][j]+"></td>");
-					}
-				}
-			}
-		}else if(cur_num_B_col+1>matBwidth){
-			for(var i = 0; i<matBheight;i++){
-				if($('#B_row_'+i).children().length>matBwidth){
-					for(var j = $('#B_row_'+i+'> td').length-1; j>matBwidth-1;j--){
-						$('#B_col_'+j).remove();
-					}
-				}
-			}
-		}
-		cur_num_B_col = matBwidth-1;
-
+		resizeMatB(matBheight,matBwidth);
 	}
 }
 
@@ -134,7 +152,6 @@ function matAupdate(element){
 	pos[1] = element.parentElement.id.split("_")[2];
 	pos[0] = element.parentElement.parentElement.id.split("_")[2];
 	matA[pos[0]][pos[1]] = parseFloat(element.value);
-	console.log(matA);
 }
 
 function matBupdate(element){
@@ -146,19 +163,17 @@ function matBupdate(element){
 
 function calculate(){
 	var scope={
-		A: math.matrix(matA),
-		B: math.matrix(matB),
+		A: {},
+		B: {},
 		D: 1,
 		C: 1
 	}
-	console.log(scope);
 	if(enable_cube){
-		console.log(PLL_SCOPE);
 		scope = PLL_SCOPE;
 	}
+	scope.A = math.matrix(matA);
+	scope.B = math.matrix(matB);
 	var input = document.getElementById('input').value;
-	console.log("input: "+input);
-	console.log("includes A^-"+ input.includes("A^-"));
 	if(input.includes("B^-")||input.includes("B^(-")){
 		scope.D = math.inv(scope.B);
 		input = input.replace("B^-","D^")
@@ -194,7 +209,6 @@ function calculate(){
 			}
 		}
 	}else if(cur_num_ANS_col+1>matANSwidth){
-		console.log("remove colom")
 		for(var i = 0; i<matANSheight;i++){
 			if($('#ANS_row_'+i).children().length>matANSwidth){
 				for(var j = $('#ANS_row_'+i+' > td').length-1; j>matANSwidth-1;j--){
@@ -212,5 +226,11 @@ function calculate(){
 }
 
 function setAToAnswer(){
-	
+	matA = matANS._data;
+	resizeMatA(matANS.size()[0],matANS.size()[1],true);
+}
+
+function setBToAnswer() {
+	matB = matANS._data;
+	resizeMatA(matANS.size()[0],matANS.size()[1],true);
 }
