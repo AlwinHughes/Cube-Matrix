@@ -8,8 +8,8 @@ function cubeOptionsClick(){
 			matB = IDENTITY9;
 			resizeMatA(9,9,true,true);
 			resizeMatB(9,9,true,true);
-			$('#matAcont').append('<center> <button onclick="matARotateAClock()">Rotate Anticlockwise </button> <button onclick="matARotateClock()">Rotate Clockwise </button> </center>')
-			$('#matBcont').append('<center> <button onclick="matBRotateAClock()">Rotate Anticlockwise </button> <button onclick="matBRotateClock()">Rotate Clockwise </button> </center>')
+			$('#matAcont').append('<center> <button onclick="matARotateAClock()">Rotate Anticlockwise </button> <button onclick="matARotateClock()">Rotate Clockwise </button> <select id="matA_perm_select" onchange="matASetPerm()"> <option value=" "></option><option value="Aa">Aa</option><option value="Ab">Ab</option><option value="E">E</option><option value="Ua">Ua</option><option value="Ub">Ub</option><option value="H">H</option><option value="Z">Z</option><option value="Ja">Ja</option><option value="Jb">Jb</option><option value="T">T</option><option value="Ra">Ra</option><option value="F">F</option><option value="Ga">Ga</option><option value="Gb">Gb</option><option value="Gc">Gc</option><option value="Gd">Gd</option><option value="V">V</option><option value="Na">Na</option><option value="Nb">Nb</option><option value="Y">Y</option></select> </center>')
+			$('#matBcont').append('<center> <button onclick="matBRotateAClock()">Rotate Anticlockwise </button> <button onclick="matBRotateClock()">Rotate Clockwise </button> <select id="matB_perm_select" onchange="matBSetPerm()"> <option value=" "></option><option value="Aa">Aa</option><option value="Ab">Ab</option><option value="E">E</option><option value="Ua">Ua</option><option value="Ub">Ub</option><option value="H">H</option><option value="Z">Z</option><option value="Ja">Ja</option><option value="Jb">Jb</option><option value="T">T</option><option value="Ra">Ra</option><option value="F">F</option><option value="Ga">Ga</option><option value="Gb">Gb</option><option value="Gc">Gc</option><option value="Gd">Gd</option><option value="V">V</option><option value="Na">Na</option><option value="Nb">Nb</option><option value="Y">Y</option></select> </center>')
 		}else{
 			matA = IDENTITY3;
 			matB = IDENTITY3;
@@ -43,3 +43,16 @@ function matBRotateClock(){
 	resizeMatB(matA.length,matB[0].length,true);
 }
 
+function matBSetPerm(){
+	if(document.getElementById('matB_perm_select').value!==" "){
+		matB = PLL_SCOPE[document.getElementById('matB_perm_select').value];
+		resizeMatB(9,9,true);
+	}
+}
+
+function matASetPerm() {
+	if(document.getElementById('matA_perm_select').value!==" "){
+		matA = PLL_SCOPE[document.getElementById('matA_perm_select').value];
+		resizeMatA(9,9,true);
+	}
+}
