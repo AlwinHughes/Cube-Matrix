@@ -10,6 +10,7 @@ function cubeOptionsClick(){
 			resizeMatB(9,9,true,true);
 			$('#matAcont').append('<center> <button onclick="matARotateAClock()">Rotate Anticlockwise </button> <button onclick="matARotateClock()">Rotate Clockwise </button> <select id="matA_perm_select" onchange="matASetPerm()"> <option value=" "></option><option value="Aa">Aa</option><option value="Ab">Ab</option><option value="E">E</option><option value="Ua">Ua</option><option value="Ub">Ub</option><option value="H">H</option><option value="Z">Z</option><option value="Ja">Ja</option><option value="Jb">Jb</option><option value="T">T</option><option value="Ra">Ra</option><option value="F">F</option><option value="Ga">Ga</option><option value="Gb">Gb</option><option value="Gc">Gc</option><option value="Gd">Gd</option><option value="V">V</option><option value="Na">Na</option><option value="Nb">Nb</option><option value="Y">Y</option></select> </center>')
 			$('#matBcont').append('<center> <button onclick="matBRotateAClock()">Rotate Anticlockwise </button> <button onclick="matBRotateClock()">Rotate Clockwise </button> <select id="matB_perm_select" onchange="matBSetPerm()"> <option value=" "></option><option value="Aa">Aa</option><option value="Ab">Ab</option><option value="E">E</option><option value="Ua">Ua</option><option value="Ub">Ub</option><option value="H">H</option><option value="Z">Z</option><option value="Ja">Ja</option><option value="Jb">Jb</option><option value="T">T</option><option value="Ra">Ra</option><option value="F">F</option><option value="Ga">Ga</option><option value="Gb">Gb</option><option value="Gc">Gc</option><option value="Gd">Gd</option><option value="V">V</option><option value="Na">Na</option><option value="Nb">Nb</option><option value="Y">Y</option></select> </center>')
+			$('#calculate').after('<center id="reverse_order"><button onclick="reverseorder()">Reverse Order</button></center>');
 		}else{
 			matA = IDENTITY3;
 			matB = IDENTITY3;
@@ -17,6 +18,7 @@ function cubeOptionsClick(){
 			resizeMatB(3,3,true,true);
 			$('#matAcont > center').remove();
 			$('#matBcont > center').remove();
+			$('#reverse_order').remove();
 		}
 
 	}
@@ -55,4 +57,14 @@ function matASetPerm() {
 		matA = PLL_SCOPE[document.getElementById('matA_perm_select').value];
 		resizeMatA(9,9,true);
 	}
+}
+
+function reverseorder(){
+	var string_array = document.getElementById('input').value.split("*").reverse();
+	console.log(string_array);
+	var return_string = "";
+	for(var i = 0; i<string_array.length;i++){
+		return_string = return_string + "*" + string_array[i];
+	}
+	document.getElementById('input').value = return_string.substring(1);
 }
