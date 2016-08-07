@@ -24,3 +24,11 @@ input{
 	border: black 1px solid;
 	width: 20px;
 }
+
+#hilight_non_zero{
+	display: none;
+}
+
+.nonzero{
+	background-color: red;
+}

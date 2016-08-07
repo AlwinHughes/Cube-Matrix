@@ -162,6 +162,9 @@ function matAupdate(element){
 	pos[1] = element.parentElement.id.split("_")[2];
 	pos[0] = element.parentElement.parentElement.id.split("_")[2];
 	matA[pos[0]][pos[1]] = parseFloat(element.value);
+	if(hilight_non_zero){
+		checkNonZeroA()
+	}
 }
 
 function matBupdate(element){
@@ -169,6 +172,9 @@ function matBupdate(element){
 	pos[1] = element.parentElement.id.split("_")[2];
 	pos[0] = element.parentElement.parentElement.id.split("_")[2];
 	matB[pos[0]][pos[1]] = parseFloat(element.value);
+	if(hilight_non_zero){
+		checkNonZeroB()
+	}
 }
 
 function calculate(){
@@ -233,6 +239,7 @@ function calculate(){
 		}
 	}
 	cur_num_ANS_col = matANSwidth-1;
+	checkNonZeroANS();
 }
 
 function setAToAnswer(){
