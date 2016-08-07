@@ -56,6 +56,7 @@ function createMatrix(){
 
 }
 
+
 function resizeMatA(height,width,force_update_data,rest) {
 	if(rest){
 		$('#matA').empty();
