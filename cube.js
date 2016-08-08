@@ -25,6 +25,10 @@ function cubeOptionsClick(){
 		}else{
 			matA = IDENTITY3;
 			matB = IDENTITY3;
+			matAwidth = 3;
+			matAheight = 3;
+			matBwidth = 3;
+			matBheight = 3;
 			resizeMatA(3,3,true,true);
 			resizeMatB(3,3,true,true);
 			$('#matAcont > center').remove();

@@ -19,6 +19,17 @@ var cur_num_ANS_row = 0;
 var cur_num_ANS_col = 0;
 
 function createMatrix(){
+	if(enable_cube&&hilight_non_zero){
+		resetNonZero();
+		$('#matAcont > center').remove();
+		$('#matBcont > center').remove();
+		$('#reverse_order').remove();
+		$('#hilight_non_zero').css({"display":"none"});
+		document.getElementById('cube_options').checked = false;
+
+	}
+
+	enable_cube = false;
 	matAwidth = parseInt(document.getElementById('matAwidth').value);
 	matAheight = parseInt(document.getElementById('matAheight').value);
 	matBwidth = parseInt(document.getElementById('matBwidth').value);
@@ -162,7 +173,7 @@ function matAupdate(element){
 	pos[1] = element.parentElement.id.split("_")[2];
 	pos[0] = element.parentElement.parentElement.id.split("_")[2];
 	matA[pos[0]][pos[1]] = parseFloat(element.value);
-	if(hilight_non_zero){
+	if(hilight_non_zero&&enable_cube){
 		checkNonZeroA()
 	}
 }
@@ -172,7 +183,7 @@ function matBupdate(element){
 	pos[1] = element.parentElement.id.split("_")[2];
 	pos[0] = element.parentElement.parentElement.id.split("_")[2];
 	matB[pos[0]][pos[1]] = parseFloat(element.value);
-	if(hilight_non_zero){
+	if(hilight_non_zero&&enable_cube){
 		checkNonZeroB()
 	}
 }
@@ -239,15 +250,27 @@ function calculate(){
 		}
 	}
 	cur_num_ANS_col = matANSwidth-1;
-	checkNonZeroANS();
+	if(enable_cube&&hilight_non_zero){
+		checkNonZeroANS();	
+	}
 }
 
 function setAToAnswer(){
 	matA = matANS._data;
+	matAheight = matANS.size()[0];
+	matAwidth = matANS.size()[1];
 	resizeMatA(matANS.size()[0],matANS.size()[1],true);
+	if(enable_cube&&hilight_non_zero){
+		checkNonZeroA();
+	}
 }
 
 function setBToAnswer() {
 	matB = matANS._data;
+	matBheight = matANS.size()[0];
+	matBwidth = matANS.size()[1];
 	resizeMatB(matANS.size()[0],matANS.size()[1],true);
+	if(enable_cube&&hilight_non_zero){
+		checkNonZeroB();
+	}
 }
