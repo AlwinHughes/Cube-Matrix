@@ -157,3 +157,17 @@ function resetNonZero() {
 		}
 	}	
 }
+
+function createPermutationMatFromIDMat(IDMat) {
+	var PMat = Array(IDMat.length);
+	for(var i = 0; i<IDMat.length;i++){
+		PMat[i].push(Array(IDMat.length));
+		for(var j = 0; j<IDMat.length;j++){
+			if(j = IDMat[j]+i){
+				Pmat[i][j] = 1;
+			}else{
+				Pmat[i][j] = 0;
+			}
+		}
+	}
+}
